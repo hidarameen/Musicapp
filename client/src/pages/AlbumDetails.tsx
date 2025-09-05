@@ -80,7 +80,7 @@ export default function AlbumDetails() {
       setCurrentSong({
         id: song.id,
         title: song.title,
-        artistId: song.artistId,
+        artistId: song.artistId || '',
         audioUrl: song.audioUrl,
         duration: song.duration || 0
       });
@@ -254,8 +254,8 @@ export default function AlbumDetails() {
                   
                   <div className="flex items-center space-x-4 min-w-0">
                     <div className="w-12 h-12 bg-muted rounded overflow-hidden flex-shrink-0">
-                      {song.imageUrl ? (
-                        <img src={song.imageUrl} alt={song.title} className="w-full h-full object-cover" />
+                      {album.coverImageUrl ? (
+                        <img src={album.coverImageUrl} alt={song.title} className="w-full h-full object-cover" />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
                           <Music className="w-4 h-4 text-muted-foreground" />
@@ -274,7 +274,7 @@ export default function AlbumDetails() {
                   
                   <div className="flex items-center justify-center space-x-2">
                     <span className="text-sm text-muted-foreground">
-                      {formatNumber(song.playCount)}
+                      {formatNumber(song.playCount || 0)}
                     </span>
                     <Button variant="ghost" size="sm" className="opacity-0 group-hover:opacity-100" onClick={(e) => e.stopPropagation()}>
                       <Heart className="w-4 h-4" />
@@ -297,16 +297,7 @@ export default function AlbumDetails() {
           )}
           
           {/* Album Description */}
-          {album.description && (
-            <Card className="mt-8">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold mb-4">عن الألبوم</h3>
-                <p className="text-muted-foreground leading-relaxed" data-testid="text-album-description">
-                  {album.description}
-                </p>
-              </CardContent>
-            </Card>
-          )}
+          {/* Album Description - Removed as it doesn't exist in schema */}
         </div>
       </main>
       <MusicPlayer />

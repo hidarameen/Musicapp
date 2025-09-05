@@ -58,7 +58,7 @@ export function verifyToken(token: string): { userId: string } | null {
 
 export const isAuthenticated: RequestHandler = async (req, res, next) => {
   const token = req.headers.authorization?.replace('Bearer ', '') || 
-                req.session?.token;
+                (req.session as any)?.token;
 
   if (!token) {
     return res.status(401).json({ message: "غير مخول" });

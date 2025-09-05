@@ -269,7 +269,7 @@ export default function Playlists() {
         </div>
 
         {/* User's Playlists */}
-        {user && (
+        {user ? (
           <div className="mb-12">
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
               <UserIcon className="w-6 h-6" />
@@ -375,7 +375,7 @@ export default function Playlists() {
               </Card>
             )}
           </div>
-        )}
+        ) : null}
 
         {/* Public Playlists */}
         <div>

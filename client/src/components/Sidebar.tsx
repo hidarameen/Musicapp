@@ -205,7 +205,7 @@ export default function Sidebar() {
           </button>
         )}
 
-        {user && (
+        {user ? (
           <button
             onClick={handleLogout}
             disabled={isLoggingOut}
@@ -215,7 +215,7 @@ export default function Sidebar() {
             <LogOut className="ml-2 h-4 w-4" />
             {isLoggingOut ? "جاري تسجيل الخروج..." : "تسجيل الخروج"}
           </button>
-        )}
+        ) : null}
       </div>
     </aside>
   );

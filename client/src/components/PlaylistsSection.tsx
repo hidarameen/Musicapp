@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { Play, Heart, Plus, Music, Flame, Star, Headphones } from "lucide-react";
@@ -30,7 +30,7 @@ export default function PlaylistsSection() {
   const [newPlaylistName, setNewPlaylistName] = useState("");
   const [newPlaylistDescription, setNewPlaylistDescription] = useState("");
 
-  const { data: playlists, isLoading } = useQuery({
+  const { data: playlists, isLoading } = useQuery<Playlist[]>({
     queryKey: ["/api/playlists"],
     staleTime: 5 * 60 * 1000, // 5 minutes
   });
@@ -196,7 +196,7 @@ export default function PlaylistsSection() {
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {/* Default playlists if no user playlists exist */}
-        {(!playlists || !Array.isArray(playlists) || playlists.length === 0) ? (
+        {(!playlists || !Array.isArray(playlists) || playlists.length === 0) && (
           <>
             <div className="bg-card rounded-xl p-4 hover:bg-muted transition-colors cursor-pointer hover-scale">
               <div className="flex items-center space-x-4 mb-4">
@@ -244,7 +244,7 @@ export default function PlaylistsSection() {
               </div>
             </div>
           </>
-        ) : null}
+        )}
 
         {/* User playlists */}
         {playlists && Array.isArray(playlists) && (playlists as Playlist[]).map((playlist: Playlist, index: number) => {

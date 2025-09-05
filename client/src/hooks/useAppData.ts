@@ -7,10 +7,6 @@ export function useArtists() {
     queryKey: ["/api/artists"],
     staleTime: 15 * 60 * 1000, // 15 minutes - longer cache
     gcTime: 30 * 60 * 1000, // 30 minutes
-    // Use suspense for better loading states
-    suspense: false,
-    // Keep previous data while refetching
-    placeholderData: (previousData) => previousData,
   });
 }
 
