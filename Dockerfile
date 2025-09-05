@@ -23,5 +23,13 @@ EXPOSE 5000
 # متغيرات البيئة
 ENV NODE_ENV=production
 
+# إنشاء مستخدم غير root للأمان
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nextjs -u 1001
+
+# تغيير ملكية الملفات للمستخدم الجديد
+RUN chown -R nextjs:nodejs /app
+USER nextjs
+
 # تشغيل التطبيق
 CMD ["node", "dist/server/index.js"]
