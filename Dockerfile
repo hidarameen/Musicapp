@@ -1,7 +1,4 @@
-# ======================
-# مرحلة البناء (Build Stage)
-# ======================
-FROM node:18-alpine AS builder
+FROM node:18-alpine
 
 # تعيين مجلد العمل
 WORKDIR /app
@@ -17,22 +14,6 @@ COPY . .
 
 # بناء المشروع (vite + esbuild)
 RUN npm run build
-
-# ======================
-# مرحلة التشغيل (Production Stage)
-# ======================
-FROM node:18-alpine
-
-WORKDIR /app
-
-# نسخ package.json و package-lock.json فقط
-COPY package*.json ./
-
-# تثبيت dependencies فقط (أخف)
-RUN npm ci --only=production
-
-# نسخ ناتج البناء من مرحلة البناء
-COPY --from=builder /app/dist ./dist
 
 # فتح المنفذ 5000
 EXPOSE 5000
