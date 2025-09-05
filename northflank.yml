@@ -1,0 +1,59 @@
+# ملف تكوين Northflank للتنصيب التلقائي
+apiVersion: v1
+kind: Project
+metadata:
+  name: musichub-arabic
+  description: منصة الموسيقى العربية - MusicHub
+spec:
+  services:
+    - name: musichub-web
+      type: service
+      spec:
+        image:
+          repository: northflank/musichub
+          tag: latest
+        ports:
+          - name: http
+            port: 5000
+            protocol: HTTP
+        env:
+          - name: NODE_ENV
+            value: production
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: database-credentials
+                key: url
+          - name: SESSION_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: app-secrets
+                key: session-secret
+          - name: REPL_ID
+            valueFrom:
+              secretKeyRef:
+                name: replit-auth
+                key: repl-id
+          - name: ISSUER_URL
+            value: "https://replit.com/oidc"
+          - name: REPLIT_DOMAINS
+            valueFrom:
+              secretKeyRef:
+                name: app-config
+                key: domains
+        resources:
+          requests:
+            memory: 512Mi
+            cpu: 250m
+          limits:
+            memory: 1Gi
+            cpu: 500m
+        scaling:
+          replicas: 1
+          minReplicas: 1
+          maxReplicas: 3
+        healthCheck:
+          path: /api/health
+          port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 10
