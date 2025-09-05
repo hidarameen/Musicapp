@@ -10,6 +10,15 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Fallback for production builds where __dirname might be undefined
+const getBasePath = () => {
+  if (__dirname && __dirname !== 'undefined') {
+    return __dirname;
+  }
+  // Fallback to current working directory
+  return process.cwd();
+};
+
 const viteLogger = createLogger();
 
 export function log(message: string, source = "express") {
@@ -49,8 +58,9 @@ export async function setupVite(app: Express, server: Server) {
     const url = req.originalUrl;
 
     try {
+      const basePath = getBasePath();
       const clientTemplate = path.resolve(
-        __dirname,
+        basePath,
         "..",
         "client",
         "index.html",
@@ -72,7 +82,8 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
-  const distPath = path.resolve(__dirname, "public");
+  const basePath = getBasePath();
+  const distPath = path.resolve(basePath, "public");
 
   if (!fs.existsSync(distPath)) {
     throw new Error(
