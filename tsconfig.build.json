@@ -14,7 +14,8 @@
     "lib": ["ES2022"],
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": false,
     "baseUrl": ".",
     "types": ["node"],
     "paths": {

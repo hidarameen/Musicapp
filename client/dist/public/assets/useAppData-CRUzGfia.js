@@ -1,0 +1,1 @@
+import{d as e}from"./index-CQ1CQ49d.js";function r(){return e({queryKey:["/api/artists"],staleTime:15*60*1e3,gcTime:30*60*1e3,suspense:!1,placeholderData:s=>s})}function t(){return e({queryKey:["/api/songs/trending"],staleTime:2*60*1e3,gcTime:5*60*1e3})}function a(){return e({queryKey:["/api/videos"],staleTime:5*60*1e3,gcTime:10*60*1e3})}export{r as a,a as b,t as u};
