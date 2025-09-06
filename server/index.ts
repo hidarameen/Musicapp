@@ -1,14 +1,14 @@
 import express, { type Request, Response, NextFunction } from "express";
-import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
+import { registerRoutes } from "./routes.js";
+import { setupVite, serveStatic, log } from "./vite.js";
 import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
-import { db } from './db';
+import { db } from './db.js';
 import { eq } from 'drizzle-orm';
 import compression from "compression";
 import cors from 'cors';
-import { storage } from "./storage";
-import { hashPassword } from "./auth";
+import { storage } from "./storage.js";
+import { hashPassword } from "./auth.js";
 
 const app = express();
 app.use(express.json());

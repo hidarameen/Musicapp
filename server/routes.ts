@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
-import { setupAuth, isAuthenticated, hashPassword, verifyPassword, generateToken } from "./auth";
+import { storage } from "./storage.js";
+import { setupAuth, isAuthenticated, hashPassword, verifyPassword, generateToken } from "./auth.js";
 import multer from "multer";
 import path from "path";
 import fs from "fs";
@@ -15,7 +15,7 @@ import {
   insertPlaylistSongSchema,
   loginSchema,
   registerSchema,
-} from "@shared/schema";
+} from "../shared/schema.js";
 
 // Multer configuration for file uploads
 const storage_config = multer.diskStorage({
