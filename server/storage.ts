@@ -22,8 +22,8 @@ import {
   type PlaylistSong,
   type InsertPlaylistSong,
   type UserFavorite,
-} from "@shared/schema";
-import { db } from "./db";
+} from "../shared/schema.js";
+import { db } from "./db.js";
 import { eq, desc, asc, sql, and } from "drizzle-orm";
 
 export interface IStorage {
