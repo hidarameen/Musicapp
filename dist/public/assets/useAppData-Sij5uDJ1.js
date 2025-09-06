@@ -1,0 +1,1 @@
+import{d as e}from"./index-BEosjvFY.js";function i(){return e({queryKey:["/api/artists"],staleTime:15*60*1e3,gcTime:30*60*1e3})}function r(){return e({queryKey:["/api/songs/trending"],staleTime:2*60*1e3,gcTime:5*60*1e3})}function t(){return e({queryKey:["/api/videos"],staleTime:5*60*1e3,gcTime:10*60*1e3})}export{i as a,t as b,r as u};
