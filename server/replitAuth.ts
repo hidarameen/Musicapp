@@ -59,6 +59,8 @@ async function upsertUser(
 ) {
   await storage.upsertUser({
     id: claims["sub"],
+    username: claims["email"] || claims["sub"], // Use email as username or sub as fallback
+    password: "replit-oauth", // Placeholder for OAuth users
     email: claims["email"],
     firstName: claims["first_name"],
     lastName: claims["last_name"],

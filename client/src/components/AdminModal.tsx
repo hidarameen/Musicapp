@@ -443,14 +443,15 @@ export default function AdminModal() {
             coverImageUrl: "",
           };
           
-          const newAlbum = await apiRequest("POST", "/api/albums", defaultAlbumData);
-          albumId = newAlbum.id;
+          const newAlbumResponse = await apiRequest("POST", "/api/albums", defaultAlbumData);
+          const newAlbum = newAlbumResponse as unknown as Album;
+          albumId = newAlbum.id || '';
           
           // Refresh albums list
           queryClient.invalidateQueries({ queryKey: ["/api/albums"] });
         }
       } else if (albumId === "none") {
-        albumId = null;
+        albumId = undefined;
       }
       
       // Convert empty strings to null for optional foreign key fields
